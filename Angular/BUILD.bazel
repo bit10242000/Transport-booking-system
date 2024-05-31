@@ -1,0 +1,6 @@
+load("@rules_nodejs//nodejs:toolchain.bzl", "nodejs_toolchain")
+
+nodejs_toolchain(
+        name = "nodejs_toolchain",
+        node = "@",
+)
