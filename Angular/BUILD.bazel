@@ -1,6 +1,29 @@
 load("@rules_nodejs//nodejs:toolchain.bzl", "nodejs_toolchain")
 
+load("@rules_nodejs//nodejs:repositories.bzl", "node_repositories")
+
+nodejs_repositories(
+      name = "nodejs_repository",
+      node_version = "22.2.0",
+      node_repositories = {
+                "22.2.0-linux-x64": ("node-v22.2.0-linux-x64.tar.xz", "node-v22.2.0-linux-x64")
+        },
+      node_urls = ["https://nodejs.org/dist/v22.2.0/node-v22.2.0-linux-x64.tar.xz"]
+                                            )
+
+
 nodejs_toolchain(
         name = "nodejs_toolchain",
-        node = "@",
+        node = "@nodejs_repository",
+)
+
+toolchain(
+        name = "my_nodejs",
+        exec_compatible_with = [
+            "@platforms//os:linux",
+            "@platforms//cpu:x86_64",
+        ],
+        toolchain = ":toolchain",
+        toolchain_type = "@rules_nodejs//nodejs:toolchain_type",
+                                        )
 )
