@@ -1,0 +1,2 @@
+bazel_dep(name = "rules_codeowners", version = "0.2.1")
+bazel_dep(name = "rules_nodejs", version = "6.1.1")
